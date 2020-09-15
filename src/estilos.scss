@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;500&display=swap");
+$fontfamily: "Public Sans", sans-serif;
+$fontSize: 16px;
+
+body {
+  margin: 0;
+  font-family: $fontfamily;
+  font-size: $fontSize;
+}
+.header {
+  font-weight: 500;
+  font-size: 2em;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  .form {
+    display: flex;
+    gap: 5em;
+    justify-content: center;
+    &__input {
+      border: 1px solid black;
+      padding: 0.5em;
+      border-radius: 1em;
+      input {
+        border: 0;
+        margin: 0.5em;
+        padding: 0;
+        width: 240px;
+        // height: 2em;
+        font-size: 1.5em;
+        outline: 0;
+      }
+    }
+  }
+}
+.respuesta {
+  width: 100%;
+  .imagencita {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 400px;
+      height: 400px;
+    }
+  }
+
+  .elementLista {
+    list-style: none;
+    text-align: center;
+    margin: 0.5em;
+  }
+  .text {
+    text-align: center;
+    font-size: 2em;
+  }
+}
