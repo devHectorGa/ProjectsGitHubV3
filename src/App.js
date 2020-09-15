@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from 'react';
 // import css from estilos.css
-import "./App.css";
-const ruta = "https://api.github.com/users/";
-const user = "dimasmendoza";
+import './App.css';
+const ruta = 'https://api.github.com/users/';
+const user = 'dimasmendoza';
 class App extends Component {
   state = {
     data: [],
   };
   peticion = () => {
-    fetch(ruta + user + "/repos")
+    fetch(ruta + user + '/repos')
       .then((res1) => res1.json())
       .then((json1) => {
         this.setState({ data: json1 });
@@ -18,8 +18,13 @@ class App extends Component {
     this.peticion();
   }
   render() {
+    const { data } = this.state;
     return (
-      {this.state.data.map({repositorio => repositorio })}
+      <Fragment>
+        {data.map((repositories) => (
+          <p>{repositories.full_name}</p>
+        ))}
+      </Fragment>
     );
   }
 }
