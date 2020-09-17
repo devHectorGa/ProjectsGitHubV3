@@ -1,19 +1,25 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import css from estilos.css
-import "./App.css";
-const ruta = "https://api.github.com/users/";
+import './App.css';
+const ruta = 'https://api.github.com/users/';
 // const user = "dimasmendoza";
 class App extends Component {
   state = {
     data: [],
-    value: "",
+    value: '',
+    error: '',
   };
   peticion = () => {
-    fetch(ruta + this.state.value + "/repos")
+    fetch(`${ruta + this.state.value}/repos`)
       .then((res1) => res1.json())
       .then((json1) => {
-        this.setState({ data: json1 });
-      });
+        if (json1.message === 'Not Found') {
+          this.setState({ data: [], error: 'User not Found' });
+        } else {
+          this.setState({ data: json1, error: '' });
+        }
+      })
+      .catch((error) => this.setState({ data: [], message: error }));
   };
 
   handleChange(event) {
@@ -21,10 +27,11 @@ class App extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    this.peticion();
   }
 
   componentDidMount() {
-    this.peticion();
+    // this.peticion();
   }
   render() {
     const { data } = this.state;
@@ -45,6 +52,12 @@ class App extends Component {
             />
           </label>
           <input type="submit" value="Submit" />
+
+          {this.state.error.length > 0 && (
+            <p Style="color: red">
+              <span>Error al traer el dato</span>
+            </p>
+          )}
         </form>
       </section>
     );
